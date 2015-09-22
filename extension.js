@@ -13,7 +13,7 @@
              url: 'https://opendatanantes.apispark.net/v1/naissances?annee='+year,
              dataType: 'jsonp',
              success: function( naissanceData ) {
-                 question = naissanceData[0]['nb_naissances'];
+                 var question = naissanceData[0]['nb_naissances'];
                  question += naissanceData[1]['nb_naissances'];
                  callback(question);
              }
@@ -23,7 +23,7 @@
    // Block and block menu descriptions
    var descriptor = {
        blocks: [
-           ['R', 'Naissances', 'get_data', year],
+           ['R', 'Naissances en %n', 'get_data', 2014],
        ]
    };
 
