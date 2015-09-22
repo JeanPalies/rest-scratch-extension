@@ -11,7 +11,7 @@
     ext.get_data = function(year, callback) {
       console.log("TEST");
        $.ajax({
-             url: 'https://opendatanantes.apispark.net/v1/naissances?annee='+year,
+             url: 'https://opendatanantes.apispark.net/v1/naissances?%24sort=sexe%20DESC&annee='+year,
              settings : {
                contentType: 'application/json',
                accepts: 'application/json'
@@ -19,11 +19,15 @@
              dataType: 'json',
              success: function( naissanceData ) {
                  console.log("Success " + naissanceData);
-                 var question = naissanceData[0]['nb_naissances'];
-                 console.log(question);
-                 question += naissanceData[1]['nb_naissances'];
-                 console.log(question);
-                 callback(question);
+                 var garcons = naissanceData[0]['nb_naissances'];
+                 console.log(garcons);
+                 var filles = naissanceData[1]['nb_naissances'];
+                 console.log(filles);
+                 if (garcons >= filles) {
+                   callback('garçon');
+                 } else {
+                   callback('fille');
+                 }
              }
        });
    };
