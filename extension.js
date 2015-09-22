@@ -8,18 +8,14 @@
         return {status: 2, msg: 'Ready'};
     };
 
-    ext.get_data = function(callback) {
-       // Make an AJAX call to the Open Weather Maps API
+    ext.get_data = function(year, callback) {
        $.ajax({
-             url: 'https://opendatanantes.apispark.net/v1/naissances',
-             settings: {
-               accepts: 'application/json',
-               contentType: 'application/json'
-             },
-             success: function( weather_data ) {
-                 // Got the data - parse it and return the temperature
-                 temperature = weather_data['main']['temp'];
-                 callback(temperature);
+             url: 'https://opendatanantes.apispark.net/v1/naissances?annee='+year,
+             dataType: 'jsonp',
+             success: function( naissanceData ) {
+                 question = naissanceData[0]['nb_naissances'];
+                 question += naissanceData[1]['nb_naissances'];
+                 callback(question);
              }
        });
    };
@@ -27,7 +23,7 @@
    // Block and block menu descriptions
    var descriptor = {
        blocks: [
-           ['R', 'get questions %s', 'get_data'],
+           ['R', 'Naissances', 'get_data', year],
        ]
    };
 
