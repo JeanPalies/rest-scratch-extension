@@ -9,7 +9,6 @@
     };
 
     ext.get_data = function(year, callback) {
-      alert("TEST");
       console.log("TEST");
        $.ajax({
              url: 'https://opendatanantes.apispark.net/v1/naissances?annee='+year,
@@ -19,10 +18,11 @@
              },
              dataType: 'json',
              success: function( naissanceData ) {
-               alert("Success");
-                 console.log("Success");
+                 console.log("Success " + naissanceData);
                  var question = naissanceData[0]['nb_naissances'];
+                 console.log(question);
                  question += naissanceData[1]['nb_naissances'];
+                 console.log(question);
                  callback(question);
              }
        });
