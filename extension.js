@@ -11,7 +11,11 @@
     ext.get_data = function(year, callback) {
        $.ajax({
              url: 'https://opendatanantes.apispark.net/v1/naissances?annee='+year,
-             dataType: 'jsonp',
+             settings : {
+               contentType: 'application/json',
+               accepts: 'application/json'
+             },
+             dataType: 'json',
              success: function( naissanceData ) {
                  var question = naissanceData[0]['nb_naissances'];
                  question += naissanceData[1]['nb_naissances'];
